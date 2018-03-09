@@ -1,10 +1,3 @@
-/*
- * Liquid.h
- *
- *  Created on: Mar 6, 2018
- *	  Author: skiphs
- */
-
 #ifndef LIQUID_H_
 #define LIQUID_H_
 

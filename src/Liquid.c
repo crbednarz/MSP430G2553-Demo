@@ -1,25 +1,8 @@
-/*
- * Liquid.c
- *
- *  Created on: Mar 6, 2018
- *	  Author: skiph
- */
-
 #include "Liquid.h"
 #include "Display.h"
 #include "Render.h"
 #include <math.h>
 #include <stdbool.h>
-
-float sign(float value)
-{
-	if (value > 0.0f)
-		return 1.0f;
-	if (value < 0.0f)
-		return -1.0f;
-	return 0.0;
-}
-
 
 void InitializeLiquidLevel(LiquidPoint* liquids, size_t length, unsigned char liquidLevel)
 {

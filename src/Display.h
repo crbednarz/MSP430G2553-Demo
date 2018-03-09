@@ -1,6 +1,7 @@
 #ifndef Display_H_
 #define Display_H_
 
+
 // https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf
 
 #define DISPLAY_SET_CONTRAST 0x81 // [0-255]
@@ -55,5 +56,9 @@
 #define DISPLAY_WIDTH 128
 #define DISPLAY_HEIGHT 64
 #define DISPLAY_WRITE_SIZE 8
+
+
+void InitializeDisplay();
+
 
 #endif /* DISPLAY_H_ */

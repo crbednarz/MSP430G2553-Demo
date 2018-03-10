@@ -49,11 +49,17 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 	static const int DECAY_BIT_SHIFT = 3;
 
 	unsigned int x = DISPLAY_WIDTH >> 1;
-	uint8_t lastY = liquids[0].Y;
-	LiquidPoint current = liquids[1];
-	for (x = 1; x < length - 1; x++)
+	int lastY = liquids[0].Y - liquids[0].Velocity;
+	LiquidPoint current = liquids[0];
+	for (x = 0; x < length; x++)
 	{
-		uint16_t neighbors = lastY + liquids[x + 1].Y;
+		uint8_t nextY;
+		if (x + 1 == length)
+			nextY = current.Y - current.Velocity;
+		else
+			nextY = liquids[x + 1].Y;
+		uint16_t neighbors = lastY + nextY;
+
 		lastY = current.Y;
 
 		int height = current.Y;
@@ -76,6 +82,7 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 
 int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x)
 {
+	x >>= 1;
 	return (liquids[x].Y + liquids[x + 1].Y) >> 1;
 }
 

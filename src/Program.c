@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "Display.h"
 #include "World.h"
+#include "Render.h"
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -27,6 +28,7 @@ static void EnableSwitch2Input()
 
 static bool TriggerSplash = false;
 
+
 void main(void)
 {
 	DisableWatchdog();
@@ -38,7 +40,8 @@ void main(void)
 	InitializeWorld(&ActiveWorld);
 
 	int time = 0;
-	while (1)
+
+	while (true)
 	{
 		time++;
 
@@ -59,6 +62,8 @@ void main(void)
 			ActiveWorld.Liquids[x + 3].Y = 40 * 4;
 			ActiveWorld.Liquids[x - 3].Y = 40 * 4;
 		}
+
+		__delay_cycles(20000);
 	}
 }
 

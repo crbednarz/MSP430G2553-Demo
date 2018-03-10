@@ -64,5 +64,19 @@ void ResetDisplayRAM_Page()
 		}
 	}
 	EndWrite();
+}
 
+
+void DisplayRenderTarget(RenderTarget renderTarget)
+{
+	BeginWrite();
+
+    WriteCommand(DISPLAY_SET_LOWER_COLUMN | (renderTarget.StartColumn & 0xF));
+    WriteCommand(DISPLAY_SET_HIGHER_COLUMN | (renderTarget.StartColumn >> 4));
+
+    int i;
+	for (i = 0; i < renderTarget.ColumnCount * (DISPLAY_HEIGHT / DISPLAY_WRITE_SIZE); i++)
+		WriteData(renderTarget.Buffer[i]);
+
+	EndWrite();
 }

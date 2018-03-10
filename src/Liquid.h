@@ -3,7 +3,7 @@
 
 #include "stddef.h"
 #include "stdint.h"
-
+#include "Render.h"
 
 #define BASE_LIQUID_LEVEL 120
 
@@ -17,7 +17,7 @@ typedef struct
 
 void InitializeLiquids(LiquidPoint* liquids, size_t length);
 
-void RenderLiquids(LiquidPoint* liquids, size_t length);
+void RenderLiquids(LiquidPoint* liquids, size_t length, RenderTarget renderTarget);
 
 void StepLiquids(LiquidPoint* liquids, size_t length);
 

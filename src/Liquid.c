@@ -1,6 +1,4 @@
 #include "Liquid.h"
-#include "Display.h"
-#include "Render.h"
 #include <math.h>
 #include <stdbool.h>
 
@@ -15,17 +13,14 @@ void InitializeLiquids(LiquidPoint* liquids, size_t length)
 }
 
 
-void RenderLiquids(LiquidPoint* liquids, size_t length)
+void RenderLiquids(LiquidPoint* liquids, size_t length, RenderTarget renderTarget)
 {
 	int masks[] = { 0, 1, 3, 7, 15, 31, 63, 127, 255 };
-	BeginWrite();
-
-	WriteCommand(DISPLAY_SET_LOWER_COLUMN | 0);
-	WriteCommand(DISPLAY_SET_HIGHER_COLUMN | 0);
 
 	unsigned int x;
 	unsigned int y;
-	for (x = 0; x < DISPLAY_WIDTH; x++)
+	unsigned int dstIndex = 0;
+	for (x = renderTarget.StartColumn; x < (renderTarget.StartColumn + renderTarget.ColumnCount); x++)
 	{
 		uint8_t fill = 0xFF;
 
@@ -36,18 +31,17 @@ void RenderLiquids(LiquidPoint* liquids, size_t length)
 		{
 			if (srcWriteY == y)
 			{
-				WriteData(masks[srcY % DISPLAY_WRITE_SIZE]);
+				renderTarget.Buffer[dstIndex] = masks[srcY % DISPLAY_WRITE_SIZE];
 				fill = 0x00;
 			}
 			else
 			{
-				WriteData(fill);
+				renderTarget.Buffer[dstIndex] = fill;
 			}
+
+			dstIndex++;
 		}
 	}
-
-
-	EndWrite();
 }
 
 void StepLiquids(LiquidPoint* liquids, size_t length)
@@ -67,8 +61,8 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 
 		velocity += neighbors - (height << 1);
 
-		int newHeight = velocity + height - TARGET_HEIGHT;
-		newHeight = (((newHeight << DECAY_BIT_SHIFT) - newHeight) >> DECAY_BIT_SHIFT) + TARGET_HEIGHT;
+		int newHeight = velocity + height - BASE_LIQUID_LEVEL;
+		newHeight = (((newHeight << DECAY_BIT_SHIFT) - newHeight) >> DECAY_BIT_SHIFT) + BASE_LIQUID_LEVEL;
 		velocity = newHeight - height;
 
 		current.Y = newHeight;

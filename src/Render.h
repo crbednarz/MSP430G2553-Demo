@@ -6,6 +6,12 @@
 #include <stdint.h>
 #include <msp430.h>
 
+typedef struct
+{
+	uint8_t* Buffer;
+	uint8_t StartColumn;
+	uint8_t ColumnCount;
+} RenderTarget;
 
 inline void WriteValue(unsigned char value)
 {
@@ -36,6 +42,8 @@ void WriteCommands(const unsigned char* data, unsigned int length);
 void ResetDisplayRAM_Vertical();
 
 void ResetDisplayRAM_Page();
+
+void DisplayRenderTarget(RenderTarget renderTarget);
 
 
 #endif /* RENDER_H_ */

@@ -28,3 +28,9 @@ void RenderWorld(World* world)
 		DisplayRenderTarget(renderTarget);
 	}
 }
+
+
+void ReportButtonPress(World* world)
+{
+
+}

@@ -22,5 +22,7 @@ void StepWorld(World* world);
 
 void RenderWorld(World* world);
 
+void ReportButtonPress(World* world);
+
 
 #endif /* WORLD_H_ */

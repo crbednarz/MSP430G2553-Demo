@@ -3,13 +3,16 @@
 
 
 #include "Render.h"
+#include <stdbool.h>
 
 
 typedef struct
 {
 	uint8_t X;
 	uint8_t Y;
+	int8_t VelocityY;
 	uint8_t Height;
+	bool IsTouchingGround;
 
 } Entity;
 

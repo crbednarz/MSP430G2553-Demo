@@ -21,6 +21,7 @@ void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget rende
 
 void StepLiquids(LiquidPoint* liquids, size_t length);
 
+int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x);
 
 
 

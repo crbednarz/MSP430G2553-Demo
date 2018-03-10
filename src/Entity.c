@@ -4,7 +4,8 @@
 
 void StepEntity(Entity* entity)
 {
-	entity->Y = (entity->Y + 1) & 0xFF;
+	entity->Y += entity->VelocityY;
+	entity->VelocityY--;
 }
 
 void RenderEntity(const Entity* entity, RenderTarget renderTarget)

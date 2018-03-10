@@ -72,3 +72,10 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 		current = liquids[x + 1];
 	}
 }
+
+
+int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x)
+{
+	return (liquids[x].Y + liquids[x + 1].Y) >> 1;
+}
+

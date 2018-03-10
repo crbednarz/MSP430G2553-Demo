@@ -86,3 +86,11 @@ int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x)
 	return (liquids[x].Y + liquids[x + 1].Y) >> 1;
 }
 
+void ShiftLiquidsLeft(LiquidPoint* liquids, size_t length)
+{
+	int x;
+	for (x = 2; x < length; x++)
+		liquids[x - 1] = liquids[x];
+
+	liquids[length - 1] = liquids[length - 2];
+}

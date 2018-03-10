@@ -14,6 +14,7 @@ typedef struct
 {
     LiquidPoint Liquids[WORLD_LIQUIDS_LENGTH];
     Entity Player;
+    uint32_t Time;
 
 } World;
 

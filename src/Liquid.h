@@ -23,6 +23,6 @@ void StepLiquids(LiquidPoint* liquids, size_t length);
 
 int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x);
 
-
+void ShiftLiquidsLeft(LiquidPoint* liquids, size_t length);
 
 #endif /* LIQUID_H_ */

@@ -7,7 +7,7 @@ void InitializeWorld(World* world)
 {
 	InitializeLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH);
 
-	world->Player.X = 8;
+	world->Player.X = 64;
 	world->Player.Y = 127;
 }
 
@@ -15,7 +15,7 @@ void InitializeWorld(World* world)
 static void TriggerSplash(World* world, uint8_t x, int8_t velocity)
 {
 	x >>= 1;
-	velocity <<= 2;
+	velocity <<= 3;
 	world->Liquids[x].Y += velocity;
 	world->Liquids[x + 1].Y += velocity;
 	world->Liquids[x - 1].Y += velocity;
@@ -52,8 +52,10 @@ static void StepPlayer(World* world)
 
 void StepWorld(World* world)
 {
-    StepLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH);
+	StepLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH);
+
     StepPlayer(world);
+    world->Time++;
 }
 
 

@@ -20,7 +20,7 @@ void InitializeWorld(World* world);
 
 void StepWorld(World* world);
 
-void RenderWorld(World* world);
+void RenderWorld(const World* world);
 
 void ReportButtonPress(World* world);
 

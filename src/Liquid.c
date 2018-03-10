@@ -13,7 +13,7 @@ void InitializeLiquids(LiquidPoint* liquids, size_t length)
 }
 
 
-void RenderLiquids(LiquidPoint* liquids, size_t length, RenderTarget renderTarget)
+void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget renderTarget)
 {
 	int masks[] = { 0, 1, 3, 7, 15, 31, 63, 127, 255 };
 

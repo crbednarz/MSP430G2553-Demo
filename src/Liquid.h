@@ -17,7 +17,7 @@ typedef struct
 
 void InitializeLiquids(LiquidPoint* liquids, size_t length);
 
-void RenderLiquids(LiquidPoint* liquids, size_t length, RenderTarget renderTarget);
+void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget renderTarget);
 
 void StepLiquids(LiquidPoint* liquids, size_t length);
 

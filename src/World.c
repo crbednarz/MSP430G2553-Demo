@@ -14,7 +14,7 @@ void StepWorld(World* world)
 }
 
 
-void RenderWorld(World* world)
+void RenderWorld(const World* world)
 {
 	RenderTarget renderTarget;
 	renderTarget.Buffer = RenderTargetBuffer;

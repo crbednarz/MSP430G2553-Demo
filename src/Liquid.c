@@ -58,6 +58,7 @@ void RenderLiquids(LiquidPoint* liquids, size_t length)
 void StepLiquids(LiquidPoint* liquids, size_t length)
 {
 	static const int TARGET_HEIGHT = 120;
+	static const int DECAY_BIT_SHIFT = 3;
 
 	unsigned int x = DISPLAY_WIDTH >> 1;
 	unsigned char lastY = liquids[0].Y;
@@ -72,8 +73,8 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 
 		velocity += neighbors - (height << 1);
 
-		int newHeight = velocity + height;
-		newHeight = (((newHeight - TARGET_HEIGHT) * 7) >> 3) + TARGET_HEIGHT;
+		int newHeight = velocity + height - TARGET_HEIGHT;
+		newHeight = (((newHeight << DECAY_BIT_SHIFT) - newHeight) >> DECAY_BIT_SHIFT) + TARGET_HEIGHT;
 		velocity = newHeight - height;
 
 		current.Y = newHeight;

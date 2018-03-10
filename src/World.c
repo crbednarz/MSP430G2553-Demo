@@ -2,7 +2,7 @@
 
 void InitializeWorld(World* world)
 {
-    InitializeLiquidLevel(Liquids, LIQUIDS_LENGTH, 120);
+	InitializeLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH);
 }
 
 
@@ -10,6 +10,7 @@ void StepWorld(World* world)
 {
     StepLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH);
 }
+
 
 void RenderWorld(World* world)
 {

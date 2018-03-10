@@ -4,14 +4,18 @@
 #include "stddef.h"
 #include "stdint.h"
 
+
+#define BASE_LIQUID_LEVEL 120
+
+
 typedef struct
 {
-	unsigned char Y;
-	signed char Velocity;
+	uint8_t Y;
+	int8_t Velocity;
 } LiquidPoint;
 
 
-void InitializeLiquidLevel(LiquidPoint* liquids, size_t length, unsigned char liquidLevel);
+void InitializeLiquids(LiquidPoint* liquids, size_t length);
 
 void RenderLiquids(LiquidPoint* liquids, size_t length);
 

@@ -3,6 +3,7 @@
 
 
 #include "Display.h"
+#include "Entity.h"
 #include "Liquid.h"
 
 
@@ -12,6 +13,7 @@
 typedef struct
 {
     LiquidPoint Liquids[WORLD_LIQUIDS_LENGTH];
+    Entity Player;
 
 } World;
 

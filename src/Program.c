@@ -3,7 +3,6 @@
 #include "World.h"
 #include "Render.h"
 #include <stdbool.h>
-#include <stdlib.h>
 
 
 #define LIQUIDS_LENGTH (DISPLAY_WIDTH / 2 + 1)
@@ -39,12 +38,8 @@ void main(void)
 
 	InitializeWorld(&ActiveWorld);
 
-	int time = 0;
-
 	while (true)
 	{
-		time++;
-
 		StepWorld(&ActiveWorld);
 
 		RenderWorld(&ActiveWorld);
@@ -55,7 +50,7 @@ void main(void)
 			ReportButtonPress(&ActiveWorld);
 		}
 
-		__delay_cycles(20000);
+		__delay_cycles(40000);
 	}
 }
 

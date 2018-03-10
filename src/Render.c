@@ -43,7 +43,7 @@ void ResetDisplayRAM_Vertical()
 	BeginWrite();
 	for (x = 0; x < DISPLAY_WIDTH; x++)
 	{
-		for (y = 0; y < DISPLAY_HEIGHT / DISPLAY_WRITE_SIZE; y++)
+		for (y = 0; y < DISPLAY_COLUMN_PAGES; y++)
 		{
 				WriteData(0x00);
 		}
@@ -55,7 +55,7 @@ void ResetDisplayRAM_Page()
 {
 	int x, y;
 	BeginWrite();
-	for (y = 0; y < DISPLAY_HEIGHT / DISPLAY_WRITE_SIZE; y++)
+	for (y = 0; y < DISPLAY_COLUMN_PAGES; y++)
 	{
 		WriteCommand(DISPLAY_SET_PAGE_START_ADDRESS | y);
 		for (x = 0; x < DISPLAY_WIDTH; x++)
@@ -75,7 +75,7 @@ void DisplayRenderTarget(RenderTarget renderTarget)
     WriteCommand(DISPLAY_SET_HIGHER_COLUMN | (renderTarget.StartColumn >> 4));
 
     int i;
-	for (i = 0; i < renderTarget.ColumnCount * (DISPLAY_HEIGHT / DISPLAY_WRITE_SIZE); i++)
+	for (i = 0; i < renderTarget.ColumnCount * DISPLAY_COLUMN_PAGES; i++)
 		WriteData(renderTarget.Buffer[i]);
 
 	EndWrite();

@@ -27,7 +27,7 @@ void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget rende
 		unsigned int srcX = x >> 1;
 		unsigned int srcY = (liquids[srcX].Y + liquids[srcX + 1].Y) >> 3;
 		int srcWriteY = srcY >> 3;
-		for (y = 0; y < DISPLAY_HEIGHT / DISPLAY_WRITE_SIZE; y++)
+		for (y = 0; y < DISPLAY_COLUMN_PAGES; y++)
 		{
 			if (srcWriteY == y)
 			{

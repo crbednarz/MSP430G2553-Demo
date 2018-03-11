@@ -20,4 +20,6 @@ typedef struct
 
 void RenderTiles(const TileMap* tileMap, RenderTarget renderTarget, int offsetX);
 
+void ShiftTilesLeft(TileMap* tileMap);
+
 #endif /* TILES_H_ */

@@ -2,12 +2,12 @@
 #include <math.h>
 #include <stdbool.h>
 
-void InitializeLiquids(LiquidPoint* liquids, size_t length)
+void InitializeLiquids(LiquidPoint* liquids, size_t length, uint8_t baseLiquidLevel)
 {
 	unsigned int i;
 	for (i = 0; i < length; i++)
 	{
-		liquids[i].Y = BASE_LIQUID_LEVEL;
+		liquids[i].Y = baseLiquidLevel;
 		liquids[i].Velocity = 0;
 	}
 }
@@ -43,7 +43,7 @@ void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget rende
 	}
 }
 
-void StepLiquids(LiquidPoint* liquids, size_t length)
+void StepLiquids(LiquidPoint* liquids, size_t length, uint8_t baseLiquidLevel)
 {
 	static const int DECAY_BIT_SHIFT = 3;
 
@@ -66,8 +66,8 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 
 		velocity += neighbors - (height << 1);
 
-		int newHeight = velocity + height - BASE_LIQUID_LEVEL;
-		newHeight = (((newHeight << DECAY_BIT_SHIFT) - newHeight) >> DECAY_BIT_SHIFT) + BASE_LIQUID_LEVEL;
+		int newHeight = velocity + height - baseLiquidLevel;
+		newHeight = (((newHeight << DECAY_BIT_SHIFT) - newHeight) >> DECAY_BIT_SHIFT) + baseLiquidLevel;
 		velocity = newHeight - height;
 
 		current.Y = newHeight;
@@ -79,7 +79,7 @@ void StepLiquids(LiquidPoint* liquids, size_t length)
 }
 
 
-int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x)
+uint8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x)
 {
 	x >>= 1;
 	return (liquids[x].Y + liquids[x + 1].Y) >> 1;

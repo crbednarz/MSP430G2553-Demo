@@ -21,7 +21,7 @@ static void EnableSwitch2Input()
 	P1OUT |= BIT3;
 	P1REN |= BIT3;
 	P1IE |= BIT3;
-	P1IES &= ~BIT3;
+	P1IES |= BIT3;
 	P1IFG &= ~BIT3;
 }
 

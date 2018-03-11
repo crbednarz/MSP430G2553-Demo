@@ -25,8 +25,8 @@ static const unsigned char InitializationData[] = {
 static void SetClockSpeed()
 {
     // Because we're working with real-time rendering, we want the fastest possible clock speeds.
-    DCOCTL = CALDCO_16MHZ;
-    BCSCTL1 = CALBC1_16MHZ;
+    DCOCTL = CALDCO_8MHZ;
+    BCSCTL1 = CALBC1_8MHZ;
 }
 
 static void EnableI2C()
@@ -44,7 +44,7 @@ static void EnableI2C()
 
     UCB0CTL1 = UCSSEL_2 | UCSWRST; // USCI clock source select. These bits select the BRCLK source clock -- SMCLK
 
-    UCB0BR0 = 16;
+    UCB0BR0 = 8;
     UCB0I2CSA = 0x3C; // Set slave address
     UCB0CTL1 &= ~UCSWRST; // Enable USCI
 }

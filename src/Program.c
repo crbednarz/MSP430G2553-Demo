@@ -50,7 +50,6 @@ void main(void)
 			ReportButtonPress(&ActiveWorld);
 		}
 
-		__delay_cycles(40000);
 	}
 }
 

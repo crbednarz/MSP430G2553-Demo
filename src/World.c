@@ -52,10 +52,14 @@ static void StepPlayer(World* world)
 
 void StepWorld(World* world)
 {
+    world->Time++;
+	// Because liquids are two columns wide, we only shift the liquid array every other frame.
+	if ((world->Time % 2) == 0)
+		ShiftLiquidsLeft(world->Liquids, WORLD_LIQUIDS_LENGTH);
+
 	StepLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH);
 
     StepPlayer(world);
-    world->Time++;
 }
 
 
@@ -68,9 +72,12 @@ void RenderWorld(const World* world)
 
 	for (renderTarget.StartColumn = 0; renderTarget.StartColumn < DISPLAY_WIDTH; renderTarget.StartColumn += renderTarget.ColumnCount)
 	{
-		RenderLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH, renderTarget);
+		// During the frames where we aren't shifting the liquid array over by one, we can offset the draw to make the movement appear smooth.
+		RenderLiquids(world->Liquids, WORLD_LIQUIDS_LENGTH, renderTarget, world->Time % 2);
 
 		RenderEntity(&world->Player, renderTarget);
+
+		//RenderTiles
 
 		DisplayRenderTarget(renderTarget);
 	}

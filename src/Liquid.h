@@ -1,9 +1,12 @@
 #ifndef LIQUID_H_
 #define LIQUID_H_
 
-#include "stddef.h"
-#include "stdint.h"
+
 #include "Render.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
+
 
 #define BASE_LIQUID_LEVEL 120
 
@@ -17,7 +20,7 @@ typedef struct
 
 void InitializeLiquids(LiquidPoint* liquids, size_t length);
 
-void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget renderTarget);
+void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget renderTarget, int offsetX);
 
 void StepLiquids(LiquidPoint* liquids, size_t length);
 

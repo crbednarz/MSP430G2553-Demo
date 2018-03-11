@@ -13,7 +13,7 @@ void InitializeLiquids(LiquidPoint* liquids, size_t length)
 }
 
 
-void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget renderTarget)
+void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget renderTarget, int offsetX)
 {
 	int masks[] = { 0, 1, 3, 7, 15, 31, 63, 127, 255 };
 
@@ -23,8 +23,7 @@ void RenderLiquids(const LiquidPoint* liquids, size_t length, RenderTarget rende
 	for (x = renderTarget.StartColumn; x < (renderTarget.StartColumn + renderTarget.ColumnCount); x++)
 	{
 		uint8_t fill = 0xFF;
-
-		unsigned int srcX = x >> 1;
+		unsigned int srcX = (x + offsetX) >> 1;
 		unsigned int srcY = (liquids[srcX].Y + liquids[srcX + 1].Y) >> 3;
 		int srcWriteY = srcY >> 3;
 		for (y = 0; y < DISPLAY_COLUMN_PAGES; y++)
@@ -89,8 +88,9 @@ int8_t GetLiquidHeightAt(LiquidPoint* liquids, uint8_t x)
 void ShiftLiquidsLeft(LiquidPoint* liquids, size_t length)
 {
 	int x;
-	for (x = 2; x < length; x++)
+	for (x = 1; x < length; x++)
 		liquids[x - 1] = liquids[x];
 
 	liquids[length - 1] = liquids[length - 2];
+	liquids[length - 1].Y = liquids[length - 1].Y - liquids[length - 1].Velocity;
 }
